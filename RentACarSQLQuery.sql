@@ -1,6 +1,6 @@
-﻿CREATE DATABASE ReCapDatabase;
+﻿CREATE DATABASE RantACar;
 
-use ReCapDatabase;
+use RantACar;
 
 CREATE TABLE Cars
 (
