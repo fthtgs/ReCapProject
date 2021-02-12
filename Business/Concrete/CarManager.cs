@@ -56,14 +56,14 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
-        public List<Car> GetCarsByBrandId(int id)
+        public List<Car> GetCarsByBrandId(int brandId)
         {
-            return _carDal.GetAll(p => p.BrandId == id);
+            return _carDal.GetAll(p => p.BrandId == brandId);
         }
 
-        public List<Car> GetCarsByColorId(int id)
+        public List<Car> GetCarsByColorId(int colorId)
         {
-            return _carDal.GetAll(p => p.ColorId == id);
+            return _carDal.GetAll(p => p.ColorId == colorId);
         }
 
         public void Update(Car car)
