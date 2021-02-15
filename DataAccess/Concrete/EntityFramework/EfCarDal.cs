@@ -1,4 +1,5 @@
 ﻿using Core.DataAccess.EntityFramework;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
@@ -14,7 +15,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, RentACarContext>, ICarDal
     {
-        public List<CarDetailDto> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetCarDetails(Expression<Func<Rental, bool>> filter = null)
         {
             using (RentACarContext context = new RentACarContext())
             {
@@ -28,10 +29,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  CarName = c.CarName,
                                  DailyPrice = c.DailyPrice
                              };
-                return result.ToList();
-                             
-
-                             
+                return new SuccessDataResult<List<CarDetailDto>>(result.ToList());         
             }
         }
     }

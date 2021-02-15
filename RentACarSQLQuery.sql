@@ -62,5 +62,33 @@ VALUES
 	('2','4','508','2020','800','Otomatik - Dizel - Premium');
 
 
+use RantACar;
 
+CREATE TABLE Users
+(
+	UserId int	PRIMARY KEY IDENTITY (1,1),
+	FirstName varchar(40),
+	LastName varchar(40),
+	Email varchar(40),
+	Password varchar(40)
+);
+
+CREATE TABLE Customers
+(
+	CustomerId int PRIMARY KEY IDENTITY (1,1),
+	UserId int,
+	CustomerName varchar(40),
+	FOREIGN KEY (UserId) REFERENCES Users(UserId)
+);
+
+CREATE TABLE Rentals
+(
+	Id int PRIMARY KEY IDENTITY (1,1),
+	CarId int,
+	CustomerId int,
+	RentDate DATETIME,
+	ReturnDate DATETIME NULL,
+	FOREIGN KEY (CarId) REFERENCES Cars(CarId),
+	FOREIGN KEY (CustomerId) REFERENCES Customers(CustomerId)
+);
 
