@@ -20,12 +20,12 @@ namespace Business.Concrete
         }
         public IResult Add(Rental rental)
         {
-            if (rental.ReturnDate == null && _rentalDal.GetCarDetail(R => R.CarId == rental.CarId).Count > 0)
+            if (rental.ReturnDate == null && _rentalDal.GetRentalDetail(R => R.CarId == rental.CarId).Count > 0)
             {
-                return new ErrorResult(Messages.FailedRentalAddOrUpdate);
+                return new ErrorResult(Messages.RentInvalid);
             }
             _rentalDal.Add(rental);
-            return new SuccessResult(Messages.AddedRental);
+            return new SuccessResult(Messages.RentAdded);
         }
 
         public IResult Delete(Rental rental)
@@ -46,7 +46,7 @@ namespace Business.Concrete
 
         public IDataResult<List<RentalDetailDto>> GetRentalDetails(Expression<Func<Rental, bool>> filter = null)
         {
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetCarDetail(filter), Messages.ReturnedRental);
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetail(filter), Messages.RentalReturned);
         }
 
         public IResult RentReturned(int carId)
@@ -59,7 +59,7 @@ namespace Business.Concrete
                 {
                     result.ReturnDate = DateTime.Now;
                     _rentalDal.Update(result);
-                    return new SuccessResult(Messages.ReturnedRental);
+                    return new SuccessResult(Messages.RentalReturned);
                 }
             }
             return new ErrorResult();

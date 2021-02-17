@@ -33,7 +33,7 @@ namespace Business.Concrete
         public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
-            return new SuccessResult();
+            return new SuccessResult(Messages.BrandDeleted);
         }
 
         public IDataResult<List<Brand>> GetAll()
@@ -51,7 +51,7 @@ namespace Business.Concrete
             if (brand.BrandName.Length > 2)
             {
                 _brandDal.Update(brand);
-                return new SuccessResult(Messages.BrandAdded);
+                return new SuccessResult(Messages.BrandUpdated);
             }
             else
             {

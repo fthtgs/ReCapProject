@@ -50,7 +50,7 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails().Data);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails().Data,Messages.CarListed);
         }
 
         public IDataResult<List<Car>> GetCars()
